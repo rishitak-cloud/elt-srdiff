@@ -1,5 +1,5 @@
 import torch
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset, DataLoader, DistributedSampler
 from torchvision import transforms
 from datasets import load_dataset
 
@@ -28,10 +28,26 @@ class HFCelebASRDataset(Dataset):
 def create_dataloaders(config, rank=0, world_size=1):
     raw_dataset = load_dataset("nielsr/CelebA-faces", split="train")
     split_dataset = raw_dataset.train_test_split(test_size=0.1, seed=42)
-    
+
+    train_subset = split_dataset["train"]
     val_subset = split_dataset["test"].select(range(5000))
+
+    train_data = HFCelebASRDataset(train_subset, img_size=config.img_size)
     val_data = HFCelebASRDataset(val_subset, img_size=config.img_size)
-    
-    # We only need the validation loader for inference
+
+    sampler = None
+    if world_size > 1:
+        sampler = DistributedSampler(train_data, num_replicas=world_size, rank=rank, shuffle=True)
+
+    train_loader = DataLoader(
+        train_data,
+        batch_size=config.batch_size,
+        shuffle=(sampler is None),
+        sampler=sampler,
+        num_workers=2,
+        pin_memory=True,
+        drop_last=True,
+    )
     val_loader = DataLoader(val_data, batch_size=config.batch_size, shuffle=False, num_workers=2, pin_memory=True)
-    return None, val_loader, None
+
+    return train_loader, val_loader, sampler
