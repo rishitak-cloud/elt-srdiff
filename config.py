@@ -4,6 +4,7 @@ from dataclasses import dataclass, asdict
 
 @dataclass
 class SRDiffELTConfig:
+    # Architecture
     img_size: int = 32           
     patch_size: int = 4          
     in_channels: int = 3         
@@ -12,15 +13,17 @@ class SRDiffELTConfig:
     num_heads: int = 4           
     mlp_dim: int = 1024          
     num_blocks: int = 6          
-    max_loops: int = 2           
+    max_loops: int = 6           
     min_loops: int = 1           
     num_rrdb: int = 1            
 
+    # Diffusion Schedule
     num_timesteps: int = 1000
     schedule_cosine_s: float = 0.008
 
+    # Optimization & Training
     batch_size: int = 128        
-    epochs: int = 500
+    epochs: int = 300
     lr: float = 2e-4
     weight_decay: float = 0.01
     ema_decay: float = 0.999
