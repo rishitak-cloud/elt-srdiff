@@ -12,7 +12,7 @@ class SRDiffELTConfig:
     num_heads: int = 4           
     mlp_dim: int = 1024          
     num_blocks: int = 6          
-    max_loops: int = 3           
+    max_loops: int = 2           
     min_loops: int = 1           
     num_rrdb: int = 1            
 
