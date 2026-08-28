@@ -90,5 +90,5 @@ def evaluate_model(checkpoint_path, num_batches=20):
 
 if __name__ == "__main__":
     # Pulls directly from the working directory where train.py saves it
-    MODEL_PATH = "srdiff_elt_epoch_500.pt"
+    MODEL_PATH = "srdiff_elt_epoch_300.pt"
     evaluate_model(MODEL_PATH, num_batches=20)
