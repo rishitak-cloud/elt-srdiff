@@ -23,7 +23,7 @@ class SRDiffELTConfig:
 
     # Optimization & Training
     batch_size: int = 128        
-    epochs: int = 300
+    epochs: int = 500
     lr: float = 2e-4
     weight_decay: float = 0.01
     ema_decay: float = 0.999
