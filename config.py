@@ -12,8 +12,8 @@ class SRDiffELTConfig:
     hidden_dim: int = 256        
     num_heads: int = 4           
     mlp_dim: int = 1024          
-    num_blocks: int = 2          
-    max_loops: int = 12           
+    num_blocks: int = 6          
+    max_loops: int = 9           
     min_loops: int = 1           
     num_rrdb: int = 1            
 
