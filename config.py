@@ -13,7 +13,7 @@ class SRDiffELTConfig:
     num_heads: int = 4           
     mlp_dim: int = 1024          
     num_blocks: int = 2          
-    max_loops: int = 6           
+    max_loops: int = 9           
     min_loops: int = 1           
     num_rrdb: int = 1            
 
@@ -23,7 +23,7 @@ class SRDiffELTConfig:
 
     # Optimization & Training
     batch_size: int = 128        
-    epochs: int = 500
+    epochs: int = 200
     lr: float = 2e-4
     weight_decay: float = 0.01
     ema_decay: float = 0.999
